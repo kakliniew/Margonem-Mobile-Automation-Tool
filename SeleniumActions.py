@@ -15,8 +15,7 @@ class SeleniumActions:
                 break
             except StaleElementReferenceException:
                 print("Ooops couldn't click that")
-
-
+                time.sleep(1)
 
     def click_elements(self,list_of_cords):
         for cord in list_of_cords:

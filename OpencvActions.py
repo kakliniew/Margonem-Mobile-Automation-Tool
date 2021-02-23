@@ -23,32 +23,24 @@ class OpencvActions:
         print(count, " match(es) found.")
         return points
 
-    def find_elements_from_image_with_wait(self, loading_img_path, loading_scrn_path, timeout):
+    def find_elements_from_image_with_wait(self, loading_img_path, loading_scrn_path, timeout=30):
         load_img = cv2.imread(loading_img_path, 0)  # Loading Image @UndefinedVariable
-
-
-        # Default timeout is 60 seconds
-        if (timeout == NULL):
-            timeout = 60
-
         time_spent = 0
         count_founds = 0
         found_points = None
         while (time_spent <= timeout and count_founds == 0):
             # Save a screenshot of the screen
             self.driver.save_screenshot(loading_scrn_path)
-            print("saved first screenshot")
+            print("Screenshot saved")
             load_scrn = cv2.imread(loading_scrn_path, 0)  # Loading Screenshot @UndefinedVariable
             found_points = self.find_matches(load_scrn, load_img, 0.97)
             count_founds = len(found_points)
             sleep(2)
             time_spent += 2
-
-        if (time_spent > timeout):
-            print("Test failed! Load time exceeded timeout of ", timeout, " seconds!")
-            self.driver.quit()
+        if time_spent > timeout:
+            print("Couldn't find the element for ", timeout, " seconds!")
         else:
-            print("Loading ended in aprox. ", time_spent, " seconds.")
+            print("Element(s) found in ", time_spent, " seconds.")
         return found_points
 
 

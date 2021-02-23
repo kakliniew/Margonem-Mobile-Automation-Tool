@@ -30,5 +30,5 @@ class WebdriverWrapper:
                 print(exc)
         self.userName = yaml_file['username']
         self.password = yaml_file['password']
-        print(self.password)
-        print(self.userName)
+        print("Credentials correctly loaded")
+
