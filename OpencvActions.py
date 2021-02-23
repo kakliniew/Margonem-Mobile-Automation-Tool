@@ -5,9 +5,10 @@ from time import sleep
 
 
 class OpencvActions:
+    def __init__(self, driver):
+        self.driver = driver
 
-
-    def find_matches(screenshot, template, threshold):
+    def find_matches(self, screenshot, template, threshold):
         w, h = template.shape[::-1]
 
         res = cv2.matchTemplate(screenshot, template, cv2.TM_CCOEFF_NORMED)  # @UndefinedVariable
@@ -22,26 +23,24 @@ class OpencvActions:
         print(count, " match(es) found.")
         return points
 
-    def wait_for_loading(self, loading_img_path, loading_scrn_path, timeout):
+    def find_elements_from_image_with_wait(self, loading_img_path, loading_scrn_path, timeout):
         load_img = cv2.imread(loading_img_path, 0)  # Loading Image @UndefinedVariable
 
-        print(self.driver.save_screenshot(loading_scrn_path))
-
-        load_scrn = cv2.imread(loading_scrn_path, 0)  # Loading Screenshot @UndefinedVariable
 
         # Default timeout is 60 seconds
         if (timeout == NULL):
             timeout = 60
 
         time_spent = 0
-        count = 1
-
-        while (count > 0 & time_spent <= timeout):
+        count_founds = 0
+        found_points = None
+        while (time_spent <= timeout and count_founds == 0):
             # Save a screenshot of the screen
             self.driver.save_screenshot(loading_scrn_path)
-
+            print("saved first screenshot")
             load_scrn = cv2.imread(loading_scrn_path, 0)  # Loading Screenshot @UndefinedVariable
-            count = len(self.find_matches(load_scrn, load_img, 0.97))
+            found_points = self.find_matches(load_scrn, load_img, 0.97)
+            count_founds = len(found_points)
             sleep(2)
             time_spent += 2
 
@@ -50,6 +49,7 @@ class OpencvActions:
             self.driver.quit()
         else:
             print("Loading ended in aprox. ", time_spent, " seconds.")
+        return found_points
 
 
     def skip_ads(self, close_img_path, close_img_alt_path, ad_scrn_path, timeout):
