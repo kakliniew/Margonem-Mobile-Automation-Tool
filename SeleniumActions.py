@@ -2,6 +2,7 @@ from appium.webdriver.common.touch_action import TouchAction
 import time
 from random import *
 from selenium.common.exceptions import StaleElementReferenceException
+import subprocess
 
 
 class SeleniumActions:
@@ -22,3 +23,14 @@ class SeleniumActions:
             time.sleep(random())
             TouchAction(self.driver).tap(None, cord[0], cord[1], 1).perform()
             print("Clicked element x = ", cord[0], "y = ", cord[1])
+
+    def send_keys(self, text):
+        command = "adb shell input text \"" + text + "\"";
+        subprocess.run(command)
+        print("Text was sent")
+
+    def hide_keyboard(self):
+        self.driver.hide_keyboard()
+
+    def press_ok(self):
+        self.driver.press_keycode()

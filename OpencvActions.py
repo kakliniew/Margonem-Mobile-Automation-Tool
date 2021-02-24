@@ -32,11 +32,12 @@ class OpencvActions:
             # Save a screenshot of the screen
             self.driver.save_screenshot(loading_scrn_path)
             print("Screenshot saved")
+            print("Looking for Element " + loading_img_path)
             load_scrn = cv2.imread(loading_scrn_path, 0)  # Loading Screenshot @UndefinedVariable
             found_points = self.find_matches(load_scrn, load_img, 0.97)
             count_founds = len(found_points)
-            sleep(2)
-            time_spent += 2
+            sleep(1)
+            time_spent += 1
         if time_spent > timeout:
             print("Couldn't find the element for ", timeout, " seconds!")
         else:

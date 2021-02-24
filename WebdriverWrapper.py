@@ -8,12 +8,11 @@ class WebdriverWrapper:
         self.password = None
 
         self.desired_caps = {
-            "build": "Python Android",
-            "device": "e66ef570",
             "appPackage": "com.garmory.mobilemargonem",
             "appActivity": "com.unity3d.player.UnityPlayerActivity",
             "app": "C:\\Users\\crump\\Documents\\studia opole\\margonem\MargoMini.apk",
-            "platformName": "Android"
+            "platformName": "Android",
+            "newCommandTimeout": "0"
         }
         self.driver = webdriver.Remote("http://localhost:4723/wd/hub", self.desired_caps)
         self.load_credentials()
