@@ -1,5 +1,5 @@
 import subprocess
-import time
+from time import sleep
 
 from appium.webdriver.common.touch_action import TouchAction
 from selenium.common.exceptions import StaleElementReferenceException
@@ -16,13 +16,12 @@ class SeleniumActions:
                 break
             except StaleElementReferenceException:
                 print("Ooops couldn't click that")
-                time.sleep(1)
+                sleep(1)
 
     def click_elements(self,list_of_cords):
         for cord in list_of_cords:
             # time.sleep(random())
-            TouchAction(self.driver).tap(None, cord[0], cord[1], 1).perform()
-            print("Clicked element x = ", cord[0], "y = ", cord[1])
+            self.click_element(cord)
 
     def send_keys(self, text):
         command = "adb shell input text \"" + text + "\""
@@ -34,3 +33,12 @@ class SeleniumActions:
 
     def press_ok(self):
         self.driver.press_keycode()
+
+    def click_element(self, cords):
+        TouchAction(self.driver).tap(None, cords[0], cords[1], 1).perform()
+        print("Clicked element x = ", cords[0], "y = ", cords[1])
+
+    def hold_and_moveto(self, cords_start, cords_end):
+        TouchAction(self.driver).long_press(None, cords_start[0], cords_start[1]) \
+            .move_to(None, cords_end[0], cords_end[1]).release().perform()
+        sleep(0.2)

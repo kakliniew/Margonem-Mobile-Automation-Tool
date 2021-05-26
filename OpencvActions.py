@@ -28,14 +28,14 @@ class OpencvActions:
         time_spent = 0
         count_founds = 0
         found_points = None
-        delay_time = .25
+        delay_time = .10
         while (time_spent + 0.05 <= timeout and count_founds == 0):
             # Save a screenshot of the screen
             self.driver.save_screenshot(loading_scrn_path)
             print("Screenshot saved")
             print("Looking for Element " + loading_img_path)
             load_scrn = cv2.imread(loading_scrn_path, 0)  # Loading Screenshot @UndefinedVariable
-            found_points = self.find_matches(load_scrn, load_img, 0.97)
+            found_points = self.find_matches(load_scrn, load_img, 0.99)
             count_founds = len(found_points)
             sleep(delay_time)
             time_spent += delay_time
@@ -44,6 +44,11 @@ class OpencvActions:
         else:
             print("Element(s) found in ", time_spent, " seconds.")
         return found_points
+
+    def get_color_of_pixel(self, loading_scrn_path, cord_x, cord_y):
+        self.driver.save_screenshot(loading_scrn_path)
+        load_img = cv2.imread(loading_scrn_path)
+        return load_img[cord_x][cord_y]
 
     def is_element_visible_after_seconds(self, loading_img_path, loading_scrn_path, timeout=30):
         return self.find_elements_from_image_with_wait(loading_img_path, loading_scrn_path, timeout)
