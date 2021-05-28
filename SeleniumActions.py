@@ -18,12 +18,13 @@ class SeleniumActions:
                 print("Ooops couldn't click that")
                 sleep(1)
 
-    def click_elements(self,list_of_cords):
+    def click_elements(self, list_of_cords):
         for cord in list_of_cords:
             # time.sleep(random())
             self.click_element(cord)
 
-    def send_keys(self, text):
+    @staticmethod
+    def send_keys(text):
         command = "adb shell input text \"" + text + "\""
         subprocess.run(command)
         print("Text was sent")
