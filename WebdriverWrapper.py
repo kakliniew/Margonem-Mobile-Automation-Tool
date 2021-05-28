@@ -10,7 +10,6 @@ class WebdriverWrapper:
         self.__desired_caps = {
             "appPackage": "com.garmory.mobilemargonem",
             "appActivity": "com.unity3d.player.UnityPlayerActivity",
-            "app": "C:\\Users\\crump\\Documents\\studia opole\\margonem\MargoMini.apk",
             "platformName": "Android",
             "newCommandTimeout": "0"
         }
