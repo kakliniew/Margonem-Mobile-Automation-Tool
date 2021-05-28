@@ -17,8 +17,8 @@ It is not possible to locate elements of the application using selectors, so the
 1. Install Nox Player
 1. Run emulator
 1. In Nox settings:
-* General settings -> Root
-* Performance settings -> mobile phone and 1080x1920
+ `General settings -> Root` and 
+  `Performance settings -> mobile phone and 1080x1920`
 1. Steps described here: [Instruction](https://www.bignox.com/blog/how-to-connect-android-studio-with-nox-app-player-for-android-development-and-debug/)
 1. Check if there is a connection between Emulator and adb -> type `adb devices` in console(should return `127.0.0.1:62001 device`)
 1. Install Margonem Mini from Google Apps
