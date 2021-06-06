@@ -1,4 +1,4 @@
-# MargonemMobileBot
+# Margonem-Mobile-Automation-Tool
 This is a proof-of-concept application. It performs test automation of a mobile application created in Unity. 
 It is not possible to locate elements of the application using selectors, so the program created uses finding "template" in screenshot (OpenCv match template). Some of the commands are passed via adb shell. 
 
